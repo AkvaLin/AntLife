@@ -1,0 +1,15 @@
+/Users/akvalin/RiderProjects/Practic/Practic/bin/Debug/net5.0/Practic.deps.json
+/Users/akvalin/RiderProjects/Practic/Practic/bin/Debug/net5.0/Practic.runtimeconfig.json
+/Users/akvalin/RiderProjects/Practic/Practic/bin/Debug/net5.0/Practic.runtimeconfig.dev.json
+/Users/akvalin/RiderProjects/Practic/Practic/bin/Debug/net5.0/Practic.dll
+/Users/akvalin/RiderProjects/Practic/Practic/bin/Debug/net5.0/ref/Practic.dll
+/Users/akvalin/RiderProjects/Practic/Practic/bin/Debug/net5.0/Practic.pdb
+/Users/akvalin/RiderProjects/Practic/Practic/obj/Debug/net5.0/Practic.csproj.AssemblyReference.cache
+/Users/akvalin/RiderProjects/Practic/Practic/obj/Debug/net5.0/Practic.GeneratedMSBuildEditorConfig.editorconfig
+/Users/akvalin/RiderProjects/Practic/Practic/obj/Debug/net5.0/Practic.AssemblyInfoInputs.cache
+/Users/akvalin/RiderProjects/Practic/Practic/obj/Debug/net5.0/Practic.AssemblyInfo.cs
+/Users/akvalin/RiderProjects/Practic/Practic/obj/Debug/net5.0/Practic.csproj.CoreCompileInputs.cache
+/Users/akvalin/RiderProjects/Practic/Practic/obj/Debug/net5.0/Practic.dll
+/Users/akvalin/RiderProjects/Practic/Practic/obj/Debug/net5.0/ref/Practic.dll
+/Users/akvalin/RiderProjects/Practic/Practic/obj/Debug/net5.0/Practic.pdb
+/Users/akvalin/RiderProjects/Practic/Practic/obj/Debug/net5.0/Practic.genruntimeconfig.cache
