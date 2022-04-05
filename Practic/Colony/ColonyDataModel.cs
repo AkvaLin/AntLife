@@ -2,7 +2,7 @@ namespace Practic.Colony
 {
     public struct ColonyDataModel
     {
-        public readonly string name;
+        public readonly ColonyColors name;
         public readonly int antsAmount;
         public readonly int workersAmount;
         public readonly int warriorsAmount;
@@ -10,7 +10,7 @@ namespace Practic.Colony
         public readonly string queenName;
         public readonly int resoursesAmount;
 
-        public ColonyDataModel(string name, 
+        public ColonyDataModel(ColonyColors name, 
             int antsAmount, int workersAmount, int warriorsAmount, int specialAmount,
             string queenName, int resoursesAmount)
         {

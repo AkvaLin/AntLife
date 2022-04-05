@@ -2,7 +2,8 @@ namespace Practic.Modifiers
 {
     public struct ModifiersModel
     {
-        public readonly string? basicModifier;
-        public readonly string[]? specialModifiers;
+        public readonly BasicModifiers basicModifier;
+        public readonly SpecialWorkersModifiers? specialWorkersModifiers;
+        public readonly SpecialWarriorsModifiers? specialWarriorsModifiers;
     }
 }

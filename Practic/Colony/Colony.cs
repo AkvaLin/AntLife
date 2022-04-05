@@ -7,7 +7,7 @@ namespace Practic.Colony
 {
     public class Colony
     {
-        private string name;
+        private ColonyColors name;
         public readonly Queen queen;
         private List<Worker> workers;
         private List<Warrior> warriors;
@@ -21,6 +21,15 @@ namespace Practic.Colony
             {"Росинка",0},
             {"Камушек",0},
         };
+
+        public Colony(ColonyColors name, Queen queen, List<Worker> workers, List<Warrior> warriors, List<Special> special)
+        {
+            this.name = name;
+            this.queen = queen;
+            this.workers = workers;
+            this.warriors = warriors;
+            this.special = special;
+        }
 
         private void aboutColony(ColonyDataModel data)
         {
@@ -45,6 +54,12 @@ namespace Practic.Colony
                 queen.name,
                 resources.Values.Sum()
                 );
+        }
+
+        public void getInfoAboutColony()
+        {
+            getData();
+            aboutColony(this.data);
         }
     }
 }
