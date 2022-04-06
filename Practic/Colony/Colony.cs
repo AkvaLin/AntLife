@@ -7,30 +7,34 @@ namespace Practic.Colony
 {
     public class Colony
     {
-        private ColonyColors name;
-        public readonly Queen queen;
+        public readonly ColonyColors name;
+        private Queen queen;
         private List<Worker> workers;
         private List<Warrior> warriors;
         private List<Special> special;
         private ColonyDataModel data;
 
-        private Dictionary<string, int> resources = new Dictionary<string, int>()
+        private Dictionary<Resources, int> resources = new Dictionary<Resources, int>()
         {
-            {"Веточка", 0},
-            {"Листик", 0},
-            {"Росинка",0},
-            {"Камушек",0},
+            {Resources.branch, 0},
+            {Resources.leaf, 0},
+            {Resources.dewDrop,0},
+            {Resources.stone,0},
         };
 
-        public Colony(ColonyColors name, Queen queen, List<Worker> workers, List<Warrior> warriors, List<Special> special)
+        public Colony(ColonyColors name)
         {
             this.name = name;
+        }
+
+        public void setupColony(Queen queen, List<Worker> workers, List<Warrior> warriors, List<Special> special)
+        {
             this.queen = queen;
             this.workers = workers;
             this.warriors = warriors;
             this.special = special;
         }
-
+        
         private void aboutColony(ColonyDataModel data)
         {
             Console.WriteLine($"Колония <{data.name}>\n\n" +
@@ -60,6 +64,12 @@ namespace Practic.Colony
         {
             getData();
             aboutColony(this.data);
+        }
+
+        public Queen getQueen()
+        {
+            Queen queen = this.queen;
+            return queen;
         }
     }
 }

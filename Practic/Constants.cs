@@ -23,12 +23,25 @@ namespace Practic
         vindictive      // убивает своего убийцу, даже если он неуязвим
     }
 
+    public enum SpecialsModifiers
+    {
+        hardworking,    // может брать рессурсы
+        lazy,           // не может брать рессурсы
+        usual,          // может быть атакован
+        invulnerable,   // неуязвимый
+        peaceful,       // не может аттаковать
+        agressive,      // может аттаковать
+        experienced,    // может брать любой тип ресурса
+        sprinter,       // после смерти все равно доносит ресрсы
+        legend          // отменяет все модификаторы своих и вражеских воинов
+    }
+
     public enum Types
     {
         queen,
         worker,
         warrior,
-        special
+        special,
     }
 
     public enum ColonyColors
@@ -61,5 +74,13 @@ namespace Practic
         // Особенное насекомое <ленивый обычный агрессивный легенда - Медведка>(здоровье=19, защита=7, урон=9):
         // не может брать ресурсы; может быть атакован войнами; атакует врагов(1 цель за раз и наносит 3 укуса);
         // отменяет все модификаторы своих и вражеских воинов.
+    }
+
+    public enum Resources
+    {
+        branch,
+        leaf,
+        dewDrop,
+        stone
     }
 }
