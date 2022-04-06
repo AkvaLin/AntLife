@@ -1,12 +1,12 @@
-using Practic.Interfaces;
+using System;
 using Practic.Modifiers;
 
 namespace Practic.Insects
 {
-    public class Warrior: ActingInsect, IWarrior
+    public class Warrior: ActingInsect
     {
-        public int? targetsAmount { get; set; }
-        public int? bitesAmount { get; set; }
+        public int? targetsAmount;
+        public int? bitesAmount;
 
         public void setupWarrior(Colony.Colony colony, int health, int protection, int damage,
             ModifiersModel modifiers, int targetsAmount, int bitesAmount)
@@ -21,8 +21,16 @@ namespace Practic.Insects
             this.bitesAmount = bitesAmount;
         }
         
-        public void attack(ActingInsect insect)
+        void action(ActingInsect insect, int damageTo)
         {
+        }
+        
+        public override void AboutMe()
+        {
+            base.AboutMe();
+            Console.WriteLine($"Задача воина - сражаться. " +
+                              $"Я способен атаковать сразу {targetsAmount} целец, " +
+                              $"За одну атаку я делаю количество укусов равное {bitesAmount}");
         }
     }
 }

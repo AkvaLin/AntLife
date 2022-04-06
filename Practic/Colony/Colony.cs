@@ -37,14 +37,21 @@ namespace Practic.Colony
         
         private void aboutColony(ColonyDataModel data)
         {
+            int[] queenData = queen.getQueenData();
+            
             Console.WriteLine($"Колония <{data.name}>\n\n" +
-                              $"Общая численность муравьёв: {data.antsAmount}\n" +
-                              $"\tЧисленность рабочих: {data.workersAmount}\n" +
-                              $"\tЧисленность воинов: {data.warriorsAmount}\n" +
-                              $"\tЧисленность специальных насекомых: {data.specialAmount}\n" +
-                              $"Королева {data.queenName}\n" +
-                              $"Статус королевы\n" +  // Доделать
-                              $"Количество ресурсов: {data.resoursesAmount}"
+                              $"\tОбщая численность муравьёв: {data.antsAmount}\n" +
+                              $"\t\tЧисленность рабочих: {data.workersAmount}\n" +
+                              $"\t\tЧисленность воинов: {data.warriorsAmount}\n" +
+                              $"\t\tЧисленность специальных насекомых: {data.specialAmount}\n\n" +
+                              $"\tКоролева {queen.name}\n" +
+                              "\tСтатус королевы:\n" + 
+                              $"\t\tЗдовроье: {queenData[0]}\n" +
+                              $"\t\tЗащита: {queenData[1]}\n" +
+                              $"\t\tУрон: {queenData[2]}\n" +
+                              $"\t\t\tМожеть создать {queen.newQueenAmount} королев\n" +
+                              $"\t\t\tЦикл роста личинок равен {queen.timeForNewInsect} дням\n\n" +
+                              $"\tКоличество ресурсов: {data.resoursesAmount}"
                               );
         }
 
@@ -55,7 +62,6 @@ namespace Practic.Colony
                 workers.Count, 
                 warriors.Count,
                 special.Count,
-                queen.name,
                 resources.Values.Sum()
                 );
         }
