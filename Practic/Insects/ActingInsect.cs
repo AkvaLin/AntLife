@@ -4,10 +4,10 @@ namespace Practic.Insects
 {
     public class ActingInsect: Insect
     {
-        protected void AboutQueen()
+        protected void AboutQueen(Queen queen)
         {
-            Console.WriteLine($"Имя моей королевы: {colony.queen.name}\n" +
-                              $"Параметры моей королевы: {colony.queen.queenStats}"
+            Console.WriteLine($"Имя моей королевы: \n" +
+                              $"Параметры моей королевы:"
                               );
         }
     }

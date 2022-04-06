@@ -2,7 +2,7 @@ namespace Practic.Interfaces
 {
     public interface IWorker
     {
-        string[]? resources { get; set; }
+        Resources[]? resources { get; set; }
         int? resourcesAmount { get; set; }
         bool? resourceCollectionType { get; set; }
 
