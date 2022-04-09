@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Practic.Creators;
 using Practic.Insects;
+using Practic.Modifiers;
 
 namespace Practic.Colony
 {
@@ -9,6 +11,8 @@ namespace Practic.Colony
     {
         public readonly ColonyColors name;
         private Queen queen;
+        private int eggs;
+        private int timerForNewInscets;
         private List<Worker> workers;
         private List<Warrior> warriors;
         private List<Special> special;
@@ -76,6 +80,97 @@ namespace Practic.Colony
         {
             Queen queen = this.queen;
             return queen;
+        }
+
+        public int getEggs()
+        {
+            return eggs;
+        }
+
+        public void addEggs(int amount)
+        {
+            eggs = eggs + amount;
+        }
+
+        public void clearSpecials()
+        {
+            special = new List<Special>();
+        }
+
+        public void increaseTimer()
+        {
+            timerForNewInscets++;
+        }
+
+        public void resetTimer()
+        {
+            timerForNewInscets = 0;
+        }
+
+        public int getTimer()
+        {
+            return timerForNewInscets;
+        }
+
+        public void newInsects(LifeCycle life)
+        {
+            for (int i = 0; i < eggs; i++)
+            {
+                int number = GetRandom.randomInt(0, 3);
+                switch (number)
+                {
+                    case 0:
+                        switch (GetRandom.randomInt(0, 1))
+                        {
+                            case 0:
+                                ModifiersModel workerBasicModel = WorkersCreator.createModifiers
+                                    (this, false);
+                                Worker basicWorker = WorkersCreator.createWorker(this, workerBasicModel);
+                                basicWorker.setupResourcesSettings();
+                                workers.Add(basicWorker);
+                                break;
+                            case 1:
+                                ModifiersModel workerAdvancedModel = WorkersCreator.createModifiers
+                                    (this, true);
+                                Worker advancedWorker = WorkersCreator.createWorker(this, workerAdvancedModel);
+                                advancedWorker.setupResourcesSettings();
+                                workers.Add(advancedWorker);
+                                break;
+                        }
+                        break;
+                    case 1:
+                        switch (GetRandom.randomInt(0, 1))
+                        {
+                            case 0:
+                                ModifiersModel warriorBasicModel = WarriorsCreator.createModifiers
+                                    (this, false);
+                                warriors.Add(WarriorsCreator.createWarrior(this, warriorBasicModel));
+                                break;
+                            case 1:
+                                ModifiersModel warriorAdvancedModel = WarriorsCreator.createModifiers
+                                    (this, true);
+                                warriors.Add(WarriorsCreator.createWarrior(this, warriorAdvancedModel));
+                                break;
+                        }
+                        break;
+                    case 2:
+                        special.Add(SpecialCreator.createSpecial(this));
+                        break;
+                    case 3:
+                        Queen newQueen = QueensCreator.createQueen(this);
+                        switch (GetRandom.randomInt(0, 1))
+                        {
+                            case 0:
+                                Colony newColony = new Colony(this.name);
+                                newColony.setupColony(newQueen, 
+                                    new List<Worker>(), new List<Warrior>(), new List<Special>());
+                                break;
+                            case 1:
+                                break;
+                        }
+                        break;
+                }
+            }
         }
     }
 }

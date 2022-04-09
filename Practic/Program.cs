@@ -6,7 +6,8 @@ namespace Practic
     {
         static void Main(string[] args)
         {
-            LifeCycle.day();
+            LifeCycle lifeCycle = new LifeCycle();
+            lifeCycle.day();
         }
     }
 }

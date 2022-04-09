@@ -6,7 +6,7 @@ namespace Practic.Creators
 {
     public class WarriorsCreator
     {
-        private static ModifiersModel createModifiers(Colony.Colony colony, bool isAdvanced)
+        public static ModifiersModel createModifiers(Colony.Colony colony, bool isAdvanced)
         {
             ModifiersModel modifiers;
             

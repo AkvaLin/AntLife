@@ -6,9 +6,10 @@ namespace Practic
 {
     public class LifeCycle
     {
-        private static int counter = 13;
+        private int counter = 13;
         private List<Heap> heaps;
         private List<Colony.Colony> colonies;
+        private bool specialEventWasActivated = false;
 
         public LifeCycle()
         {
@@ -29,8 +30,9 @@ namespace Practic
             colonies = newColonies;
         }
 
-        public static void day()
+        public void day()
         {
+            // Проверка засухи
             if (counter > 0)
             {
                 dayActivites();
@@ -42,9 +44,50 @@ namespace Practic
             }
         }
 
-        private static void dayActivites()
+        private void dayActivites()
         {
+            // Каст специального ивента
+            if (!specialEventWasActivated)
+            {
+                int number = GetRandom.randomInt(1, 10);
+                if (number == 10)
+                {
+                    SpecialEvent.action(colonies);
+                    specialEventWasActivated = true;
+                }
+            }
+            // Добавление новых яиц
+            for (int i = 0; i < colonies.Count; i++)
+            {
+                if (colonies[i].getEggs() == 0)
+                {
+                    colonies[i].addEggs(GetRandom.randomInt(3, 7));
+                }
+            }
+            // Распределение муравьев
+            for (int i = 0; i < colonies.Count; i++)
+            {
+                
+            }
+            // Походы муравьев
+            
+            // +1 к таймеру взросления, проверка и создание новых насекомых
+            for (int i = 0; i < colonies.Count; i++)
+            {
+                colonies[i].increaseTimer();
+                if (colonies[i].getTimer() == colonies[i].getQueen().timeForNewInsect)
+                {
+                    colonies[i].newInsects(this);
+                    colonies[i].resetTimer();
+                }
+            }
+            // -1 день до засухи
             counter--;
+        }
+
+        public void addColony(Colony.Colony colony)
+        {
+            colonies.Add(colony);
         }
     }
 }

@@ -6,7 +6,7 @@ namespace Practic.Creators
 {
     public class WorkersCreator
     {
-        private static ModifiersModel createModifiers(Colony.Colony colony, bool isAdvanced)
+        public static ModifiersModel createModifiers(Colony.Colony colony, bool isAdvanced)
         {
             ModifiersModel modifiers;
             
@@ -73,15 +73,13 @@ namespace Practic.Creators
                     for (int i = 0; i < amountOfBasic; i++)
                     {
                         Worker worker = createWorker(colony, createModifiers(colony, false));
-                        worker.setupResourcesSettings(new Resources[] {Resources.dewDrop, Resources.stone},
-                            false);
+                        worker.setupResourcesSettings();
                         workers.Add(worker);
                     }
                     for (int i = 0; i < amountOfAdvanced; i++)
                     {
                         Worker worker = createWorker(colony, createModifiers(colony, true));
-                        worker.setupResourcesSettings(new Resources[] {Resources.leaf, Resources.stone},
-                            false);
+                        worker.setupResourcesSettings();
                         workers.Add(worker);
                     }
                     break;
@@ -91,15 +89,13 @@ namespace Practic.Creators
                     for (int i = 0; i < amountOfBasic; i++)
                     {
                         Worker worker = createWorker(colony, createModifiers(colony, false));
-                        worker.setupResourcesSettings(new Resources[] {Resources.branch, Resources.branch},
-                            false);
+                        worker.setupResourcesSettings();
                         workers.Add(worker);
                     }
                     for (int i = 0; i < amountOfAdvanced; i++)
                     {
                         Worker worker = createWorker(colony, createModifiers(colony, true));
-                        worker.setupResourcesSettings(new Resources[] {Resources.dewDrop, Resources.branch}, 
-                            false);
+                        worker.setupResourcesSettings();
                         workers.Add(worker);
                     }
                     break;
@@ -109,15 +105,13 @@ namespace Practic.Creators
                     for (int i = 0; i < amountOfBasic; i++)
                     {
                         Worker worker = createWorker(colony, createModifiers(colony, false));
-                        worker.setupResourcesSettings(new Resources[] {Resources.dewDrop, Resources.dewDrop},
-                            false);
+                        worker.setupResourcesSettings();
                         workers.Add(worker);
                     }
                     for (int i = 0; i < amountOfAdvanced; i++)
                     {
                         Worker worker = createWorker(colony, createModifiers(colony, true));
-                        worker.setupResourcesSettings(new Resources[] {Resources.branch, Resources.stone}, 
-                            true);
+                        worker.setupResourcesSettings();
                         workers.Add(worker);
                     }
                     break;
