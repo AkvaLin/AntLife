@@ -84,8 +84,8 @@ namespace Practic.Creators
                     }
                     break;
                 case ColonyColors.green:
-                    amountOfBasic = GetRandom.randomInt(0, 14);
-                    amountOfAdvanced = 14 - amountOfBasic;
+                    amountOfBasic = GetRandom.randomInt(0, 12);
+                    amountOfAdvanced = 12 - amountOfBasic;
                     for (int i = 0; i < amountOfBasic; i++)
                     {
                         Worker worker = createWorker(colony, createModifiers(colony, false));
@@ -100,8 +100,8 @@ namespace Practic.Creators
                     }
                     break;
                 case ColonyColors.red:
-                    amountOfBasic = GetRandom.randomInt(0, 14);
-                    amountOfAdvanced = 14 - amountOfBasic;
+                    amountOfBasic = GetRandom.randomInt(0, 19);
+                    amountOfAdvanced = 19 - amountOfBasic;
                     for (int i = 0; i < amountOfBasic; i++)
                     {
                         Worker worker = createWorker(colony, createModifiers(colony, false));

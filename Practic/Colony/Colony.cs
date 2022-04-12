@@ -111,6 +111,15 @@ namespace Practic.Colony
         {
             return timerForNewInscets;
         }
+        
+        public AntsGroupModel getAntsGroupModel() 
+        {
+            AntsGroupModel antsGroupModel = new AntsGroupModel();
+            antsGroupModel.workers = workers;
+            antsGroupModel.warriors = warriors;
+            antsGroupModel.specials = special;
+            return antsGroupModel;
+        }
 
         public void newInsects(LifeCycle life)
         {
@@ -164,6 +173,7 @@ namespace Practic.Colony
                                 Colony newColony = new Colony(this.name);
                                 newColony.setupColony(newQueen, 
                                     new List<Worker>(), new List<Warrior>(), new List<Special>());
+                                life.addColony(newColony);
                                 break;
                             case 1:
                                 break;
