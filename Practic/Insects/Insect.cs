@@ -3,12 +3,13 @@ using Practic.Modifiers;
 
 namespace Practic.Insects
 {
-    public class Insect
+    public abstract class Insect
     {
         protected Types type;
         protected int health;
         protected int protection;
         protected int? damage;
+        protected bool canBeAttacked = true;
         protected ModifiersModel? modifiers;
         protected Colony.Colony colony;
 
@@ -76,7 +77,7 @@ namespace Practic.Insects
                     case SpecialWarriorsModifiers.anomalistic:
                         Console.WriteLine("Правад есть одно но... Я слегка странный и атакую своих вместо врагов :/");
                         break;
-                    case SpecialWarriorsModifiers.havy:
+                    case SpecialWarriorsModifiers.heavy:
                         Console.WriteLine("Мое здоровье и защита увеличиваются вдвое. " +
                                           "Я являюсь настоящей защитой для своих друзей," +
                                           "ведь враги сфокусированы на мне");
@@ -102,6 +103,50 @@ namespace Practic.Insects
                         break;
                 }
             }
+        }
+        public Types getType()
+        {
+            return type;
+        }
+
+        public int getDamage()
+        {
+            return damage ?? 0;
+        }
+
+        public ColonyColors getColor()
+        {
+            return colony.name;
+        }
+
+        public ModifiersModel getModifiers()
+        {
+            return modifiers ?? new ModifiersModel();
+        }
+
+        public bool getCanBeAttacked()
+        {
+            return canBeAttacked;
+        }
+
+        public int getHealth()
+        {
+            return health;
+        }
+
+        public void takeDamage(int damage)
+        {
+            health -= damage;
+        }
+
+        public int getProtection()
+        {
+            return protection;
+        }
+
+        public Colony.Colony getColony()
+        {
+            return colony;
         }
     }
 }

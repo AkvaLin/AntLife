@@ -5,7 +5,7 @@ namespace Practic.Insects
     public class Queen: Insect
     {
         public readonly string name;
-        public readonly int newQueenAmount;
+        private int newQueenAmount;
         public readonly int timeForNewInsect;
 
         public Queen(string name, int newQueenAmount, int timeForNewInsect)
@@ -28,6 +28,16 @@ namespace Practic.Insects
         {
             int[] data = new int[]{this.health, this.protection, this.damage ?? 0};
             return data;
+        }
+
+        public int getQueenAmount()
+        {
+            return newQueenAmount;
+        }
+
+        public void decreaseQueenAmount()
+        {
+            newQueenAmount--;
         }
 
         public override void AboutMe()

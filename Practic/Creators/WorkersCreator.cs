@@ -68,50 +68,44 @@ namespace Practic.Creators
             switch (colony.name)
             {
                 case ColonyColors.black:
-                    amountOfBasic = GetRandom.randomInt(0, 14);
+                    amountOfBasic = GetRandom.randomInt(0, 15);
                     amountOfAdvanced = 14 - amountOfBasic;
                     for (int i = 0; i < amountOfBasic; i++)
                     {
                         Worker worker = createWorker(colony, createModifiers(colony, false));
-                        worker.setupResourcesSettings();
                         workers.Add(worker);
                     }
                     for (int i = 0; i < amountOfAdvanced; i++)
                     {
                         Worker worker = createWorker(colony, createModifiers(colony, true));
-                        worker.setupResourcesSettings();
                         workers.Add(worker);
                     }
                     break;
                 case ColonyColors.green:
-                    amountOfBasic = GetRandom.randomInt(0, 12);
+                    amountOfBasic = GetRandom.randomInt(0, 13);
                     amountOfAdvanced = 12 - amountOfBasic;
                     for (int i = 0; i < amountOfBasic; i++)
                     {
                         Worker worker = createWorker(colony, createModifiers(colony, false));
-                        worker.setupResourcesSettings();
                         workers.Add(worker);
                     }
                     for (int i = 0; i < amountOfAdvanced; i++)
                     {
                         Worker worker = createWorker(colony, createModifiers(colony, true));
-                        worker.setupResourcesSettings();
                         workers.Add(worker);
                     }
                     break;
                 case ColonyColors.red:
-                    amountOfBasic = GetRandom.randomInt(0, 19);
+                    amountOfBasic = GetRandom.randomInt(0, 20);
                     amountOfAdvanced = 19 - amountOfBasic;
                     for (int i = 0; i < amountOfBasic; i++)
                     {
                         Worker worker = createWorker(colony, createModifiers(colony, false));
-                        worker.setupResourcesSettings();
                         workers.Add(worker);
                     }
                     for (int i = 0; i < amountOfAdvanced; i++)
                     {
                         Worker worker = createWorker(colony, createModifiers(colony, true));
-                        worker.setupResourcesSettings();
                         workers.Add(worker);
                     }
                     break;

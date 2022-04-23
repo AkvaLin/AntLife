@@ -1,18 +1,21 @@
+using System.Collections.Generic;
+
 namespace Practic
 {
-    public struct Heap
+    public class Heap
     {
-        private int? branchAmount;
-        private int? leafAmount;
-        private int? dewdropAmount;
-        private int? stoneAmount;
+        public Dictionary<Resources, int> resources;
 
-        public Heap(int? branchAmount = default, int? leafAmount = default, int? dewdropAmount = default, int? stoneAmount = default)
+        public Heap(int branchAmount = default, int leafAmount = default,
+            int dewdropAmount = default, int stoneAmount = default)
         {
-            this.branchAmount = branchAmount;
-            this.leafAmount = leafAmount;
-            this.dewdropAmount = dewdropAmount;
-            this.stoneAmount = stoneAmount;
+            resources = new Dictionary<Resources, int>() 
+            {
+                {Resources.branch, branchAmount},
+                {Resources.leaf, leafAmount},
+                {Resources.dewDrop,dewdropAmount},
+                {Resources.stone,stoneAmount},
+            };
         }
     }
 }

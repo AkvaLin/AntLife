@@ -13,11 +13,8 @@ namespace Practic.Colony
         private Queen queen;
         private int eggs;
         private int timerForNewInscets;
-        private List<Worker> workers;
-        private List<Warrior> warriors;
-        private List<Special> special;
+        private List<ActingInsect> insects;
         private ColonyDataModel data;
-
         private Dictionary<Resources, int> resources = new Dictionary<Resources, int>()
         {
             {Resources.branch, 0},
@@ -31,12 +28,26 @@ namespace Practic.Colony
             this.name = name;
         }
 
-        public void setupColony(Queen queen, List<Worker> workers, List<Warrior> warriors, List<Special> special)
+        public void setupColony(Queen queen, List<Worker> workers, List<Warrior> warriors, List<Special> specials)
         {
             this.queen = queen;
-            this.workers = workers;
-            this.warriors = warriors;
-            this.special = special;
+            
+            List<ActingInsect> tempList = new List<ActingInsect>();
+            foreach (var worker in workers)
+            {
+                tempList.Add(worker);
+            }
+
+            foreach (var warrior in warriors)
+            {
+                tempList.Add(warrior);
+            }
+            foreach (var special in specials)
+            {
+                tempList.Add(special);
+            }
+
+            this.insects = tempList;
         }
         
         private void aboutColony(ColonyDataModel data)
@@ -53,19 +64,38 @@ namespace Practic.Colony
                               $"\t\tЗдовроье: {queenData[0]}\n" +
                               $"\t\tЗащита: {queenData[1]}\n" +
                               $"\t\tУрон: {queenData[2]}\n" +
-                              $"\t\t\tМожеть создать {queen.newQueenAmount} королев\n" +
+                              $"\t\t\tМожеть создать ещё {queen.getQueenAmount()} королев\n" +
                               $"\t\t\tЦикл роста личинок равен {queen.timeForNewInsect} дням\n\n" +
                               $"\tКоличество ресурсов: {data.resoursesAmount}"
                               );
         }
 
         private void getData()
+        
         {
+            int workersAmount = 0;
+            int warriorsAmount = 0;
+            int specialAmount = 0;
+            foreach (var inscet in insects)
+            {
+                switch (inscet.getType())
+                {
+                    case Types.worker:
+                        workersAmount++;
+                        break;
+                    case Types.warrior:
+                        warriorsAmount++;
+                        break;
+                    case Types.special:
+                        specialAmount++;
+                        break;
+                }
+            }
             data = new ColonyDataModel(name, 
-                workers.Count + warriors.Count + special.Count,
-                workers.Count, 
-                warriors.Count,
-                special.Count,
+                insects.Count,
+                workersAmount, 
+                warriorsAmount,
+                specialAmount,
                 resources.Values.Sum()
                 );
         }
@@ -94,7 +124,7 @@ namespace Practic.Colony
 
         public void clearSpecials()
         {
-            special = new List<Special>();
+            
         }
 
         public void increaseTimer()
@@ -111,76 +141,86 @@ namespace Practic.Colony
         {
             return timerForNewInscets;
         }
-        
-        public AntsGroupModel getAntsGroupModel() 
+
+        public List<ActingInsect> getInsects()
         {
-            AntsGroupModel antsGroupModel = new AntsGroupModel();
-            antsGroupModel.workers = workers;
-            antsGroupModel.warriors = warriors;
-            antsGroupModel.specials = special;
-            return antsGroupModel;
+            return insects;
         }
 
         public void newInsects(LifeCycle life)
         {
             for (int i = 0; i < eggs; i++)
             {
-                int number = GetRandom.randomInt(0, 3);
-                switch (number)
+                switch (GetRandom.randomInt(0, 8))
                 {
-                    case 0:
-                        switch (GetRandom.randomInt(0, 1))
+                    case <3:
+                        switch (GetRandom.randomInt(0, 2))
                         {
                             case 0:
                                 ModifiersModel workerBasicModel = WorkersCreator.createModifiers
                                     (this, false);
                                 Worker basicWorker = WorkersCreator.createWorker(this, workerBasicModel);
-                                basicWorker.setupResourcesSettings();
-                                workers.Add(basicWorker);
+                                insects.Add(basicWorker);
                                 break;
                             case 1:
                                 ModifiersModel workerAdvancedModel = WorkersCreator.createModifiers
                                     (this, true);
                                 Worker advancedWorker = WorkersCreator.createWorker(this, workerAdvancedModel);
-                                advancedWorker.setupResourcesSettings();
-                                workers.Add(advancedWorker);
+                                insects.Add(advancedWorker);
                                 break;
                         }
                         break;
-                    case 1:
-                        switch (GetRandom.randomInt(0, 1))
+                    case <5:
+                        switch (GetRandom.randomInt(0, 2))
                         {
                             case 0:
                                 ModifiersModel warriorBasicModel = WarriorsCreator.createModifiers
                                     (this, false);
-                                warriors.Add(WarriorsCreator.createWarrior(this, warriorBasicModel));
+                                insects.Add(WarriorsCreator.createWarrior(this, warriorBasicModel));
                                 break;
                             case 1:
                                 ModifiersModel warriorAdvancedModel = WarriorsCreator.createModifiers
                                     (this, true);
-                                warriors.Add(WarriorsCreator.createWarrior(this, warriorAdvancedModel));
+                                insects.Add(WarriorsCreator.createWarrior(this, warriorAdvancedModel));
                                 break;
                         }
                         break;
-                    case 2:
-                        special.Add(SpecialCreator.createSpecial(this));
+                    case <6:
+                        insects.Add(SpecialCreator.createSpecial(this));
                         break;
-                    case 3:
-                        Queen newQueen = QueensCreator.createQueen(this);
-                        switch (GetRandom.randomInt(0, 1))
+                    case 7:
+                        if (queen.getQueenAmount() > 0)
                         {
-                            case 0:
-                                Colony newColony = new Colony(this.name);
-                                newColony.setupColony(newQueen, 
-                                    new List<Worker>(), new List<Warrior>(), new List<Special>());
-                                life.addColony(newColony);
-                                break;
-                            case 1:
-                                break;
+                            Queen newQueen = QueensCreator.createQueen(this);
+                            switch (GetRandom.randomInt(0, 2))
+                            {
+                                case 0:
+                                    Colony newColony = new Colony(this.name);
+                                    newColony.setupColony(newQueen, 
+                                        new List<Worker>(), new List<Warrior>(), new List<Special>());
+                                    life.addColony(newColony);
+                                    break;
+                                case 1:
+                                    break;
+                            }
+                            queen.decreaseQueenAmount();
                         }
                         break;
                 }
             }
+        }
+
+        public void deleteInsect(ActingInsect insect)
+        {
+            insects.Remove(insect);
+        }
+
+        public void addResources(int branches, int leafs, int dewdrops, int stones)
+        {
+            resources[Resources.branch] += branches;
+            resources[Resources.leaf] += leafs;
+            resources[Resources.dewDrop] += dewdrops;
+            resources[Resources.stone] += stones;
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Practic.Creators
                     break;
                 case ColonyColors.red:
                     modifiers = new ModifiersModel(isAdvanced ? BasicModifiers.advanced : BasicModifiers.elite,
-                        null, isAdvanced ? SpecialWarriorsModifiers.havy : null);
+                        null, isAdvanced ? SpecialWarriorsModifiers.heavy : null);
                     break;
                 case ColonyColors.green:
                     modifiers = new ModifiersModel(isAdvanced ? BasicModifiers.usual : BasicModifiers.legendary, 
@@ -71,7 +71,7 @@ namespace Practic.Creators
                         switch (colony.name)
             {
                 case ColonyColors.black:
-                    amountOfBasic = GetRandom.randomInt(0, 6);
+                    amountOfBasic = GetRandom.randomInt(0, 7);
                     amountOfAdvanced = 6 - amountOfBasic;
                     for (int i = 0; i < amountOfBasic; i++)
                     {
@@ -85,7 +85,7 @@ namespace Practic.Creators
                     }
                     break;
                 case ColonyColors.green:
-                    amountOfBasic = GetRandom.randomInt(0, 9);
+                    amountOfBasic = GetRandom.randomInt(0, 10);
                     amountOfAdvanced = 9 - amountOfBasic;
                     for (int i = 0; i < amountOfBasic; i++)
                     {
@@ -99,7 +99,7 @@ namespace Practic.Creators
                     }
                     break;
                 case ColonyColors.red:
-                    amountOfBasic = GetRandom.randomInt(0, 8);
+                    amountOfBasic = GetRandom.randomInt(0, 9);
                     amountOfAdvanced = 8 - amountOfBasic;
                     for (int i = 0; i < amountOfBasic; i++)
                     {
