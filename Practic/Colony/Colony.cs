@@ -99,7 +99,7 @@ namespace Practic.Colony
                 resources.Values.Sum()
                 );
         }
-
+    
         public void getInfoAboutColony()
         {
             getData();
@@ -124,7 +124,12 @@ namespace Practic.Colony
 
         public void clearSpecials()
         {
-            
+            for (int i = 0; i < insects.Count;)
+            {
+                if (insects[i].getType() == Types.special)
+                    insects.Remove(insects[i]);
+                else i++;
+            }
         }
 
         public void increaseTimer()
@@ -215,6 +220,11 @@ namespace Practic.Colony
             insects.Remove(insect);
         }
 
+        public int getResourcesAmount()
+        {
+            return resources.Values.Sum();
+        }
+        
         public void addResources(int branches, int leafs, int dewdrops, int stones)
         {
             resources[Resources.branch] += branches;

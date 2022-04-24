@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Practic.Creators;
 using Practic.Insects;
 
@@ -71,16 +72,20 @@ namespace Practic
             // Проверка засухи
             if (counter > 0)
             {
-                dayActivites();
+                userInteraction();
                 day();
             }
             else
             {
-                Console.WriteLine("game is over");
-                foreach (var colony in colonies)
+                Colony.Colony winColony = colonies[0];
+                Console.WriteLine("Program is over");
+                for (int i = 0; i < colonies.Count-1; i++)
                 {
-                    colony.getInfoAboutColony();
+                    if (colonies[i + 1].getResourcesAmount() > winColony.getResourcesAmount())
+                        winColony = colonies[i + 1];
                 }
+                Console.WriteLine("Выжившая колония");
+                winColony.getInfoAboutColony();
             }
         }
 
@@ -94,6 +99,7 @@ namespace Practic
                 {
                     SpecialEvent.action(colonies);
                     specialEventWasActivated = true;
+                    Console.WriteLine("Лягушка вышла на охоту и съела всех специальных насекомых");
                 }
             }
             // Добавление новых яиц
@@ -417,6 +423,133 @@ namespace Practic
                         }
                     }
                 }
+            }
+        }
+
+        private void userInteraction()
+        {
+            Console.WriteLine("Введите 1 для начала нового дня\n" +
+                              "Введите 2, чтобы получить информацию о колониях\n" +
+                              "Введите 3, чтобы получить информацию о муравяьях\n" +
+                              "Введите 4, чтобы получить информацию о королевах");
+            string userInput = Console.ReadLine();
+            List<string> coloniesAmount = new List<string>();
+            switch (userInput)
+            {
+                case "1":
+                    Console.Clear();
+                    dayActivites();
+                    foreach (var colony in colonies)
+                    {
+                        colony.getInfoAboutColony();
+                    }
+
+                    Console.WriteLine("День завершён");
+                    Console.WriteLine($"До засухи - {counter}");
+                    Console.WriteLine("Нажмите кнопку, чтобы продолжить");
+                    Console.ReadKey();
+                    Console.Clear();
+                    break;
+                case "2":
+                    Console.Clear();
+                    Console.WriteLine($"Выберите колонию от 1 до {colonies.Count}");
+                    userInput = Console.ReadLine();
+                    coloniesAmount.Clear();
+                    for (int i = 1; i <= colonies.Count; i++)
+                    {
+                        coloniesAmount.Add(i.ToString());
+                    }
+                    if (coloniesAmount.Contains(userInput))
+                    {
+                        colonies[Convert.ToInt32(userInput) - 1].getInfoAboutColony();
+                        Console.WriteLine("Нажмите, чтобы продолжить");
+                        Console.ReadKey();
+                        Console.Clear();
+                        userInteraction();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Некорректный ввод. Нажмите кнопку, чтобы продолжить");
+                        Console.ReadKey();
+                        Console.Clear();
+                        userInteraction();
+                    }
+                    break;
+                case "3":
+                    Console.Clear();
+                    Console.WriteLine($"Выберите колонию от 1 до {colonies.Count}");
+                    userInput = Console.ReadLine();
+                    coloniesAmount.Clear();
+                    for (int i = 1; i <= colonies.Count; i++)
+                    {
+                        coloniesAmount.Add(i.ToString());
+                    }
+                    if (coloniesAmount.Contains(userInput))
+                    {
+                        Colony.Colony userColony = colonies[Convert.ToInt32(userInput) - 1];
+                        Console.WriteLine($"Выберите тип муравья от 1 до {userColony.getInsects().Count}");
+                        userInput = Console.ReadLine();
+                        List<string> antsAmount = new List<string>();
+                        for (int i = 1; i <= userColony.getInsects().Count; i++)
+                        {
+                            antsAmount.Add(i.ToString());
+                        }
+                        if (antsAmount.Contains(userInput))
+                        {
+                            userColony.getInsects()[Convert.ToInt32(userInput) - 1].AboutMe();
+                            Console.WriteLine("Нажмите, чтобы продолжить");
+                            Console.ReadKey();
+                            Console.Clear();
+                            userInteraction();
+                        }
+                        else
+                        {
+                            Console.WriteLine("Некорректный ввод. Нажмите кнопку, чтобы продолжить");
+                            Console.ReadKey();
+                            Console.Clear();
+                            userInteraction();
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Некорректный ввод. Нажмите кнопку, чтобы продолжить");
+                        Console.ReadKey();
+                        Console.Clear();
+                        userInteraction();
+                    }
+                    break;
+                case "4":
+                    Console.Clear();
+                    Console.WriteLine($"Выберите колонию от 1 до {colonies.Count}");
+                    userInput = Console.ReadLine();
+                    coloniesAmount.Clear();
+                    for (int i = 1; i <= colonies.Count; i++)
+                    {
+                        coloniesAmount.Add(i.ToString());
+                    }
+                    if (coloniesAmount.Contains(userInput))
+                    {
+                        colonies[Convert.ToInt32(userInput) - 1].getQueen().AboutMe();
+                        Console.WriteLine("Нажмите, чтобы продолжить");
+                        Console.ReadKey();
+                        Console.Clear();
+                        userInteraction();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Некорректный ввод. Нажмите кнопку, чтобы продолжить");
+                        Console.ReadKey();
+                        Console.Clear();
+                        userInteraction();
+                    }
+                    break;
+                default:
+                    Console.WriteLine("Некорректный ввод. Нажмите кнопку, чтобы продолжить");
+                    Console.ReadKey();
+                    Console.Clear();
+                    userInteraction();
+                    break;
+                    
             }
         }
     }
